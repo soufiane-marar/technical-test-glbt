@@ -1,10 +1,10 @@
-### Test Technique pour Développeurs Frontend (Angular/React/React Native) avec Backend Node.js Mock
+### Test Technique pour Développeurs Frontend (Angular/React/React Native/Ionic)
 
 #### Objectif
-Créer une application front-end en Angular, React ou React Native qui interagit avec un backend Node.js mock. L'objectif est d'évaluer la compétence du candidat en termes de modularisation des composants, de structuration de l'application, et de déploiement avec Docker.
+Créer une application front-end en Angular, React, React Native ou Ionic qui interagit avec un backend Node.js mock. L'objectif est d'évaluer la compétence du candidat en termes de modularisation des composants, de structuration de l'application, et de déploiement avec Docker.
 
 #### Durée estimée
-3 heures
+2 heures
 
 ### Instructions
 
@@ -16,7 +16,7 @@ Créer une application front-end en Angular, React ou React Native qui interagit
    - Les données peuvent être stockées en mémoire (pas besoin de base de données).
 
 #### Partie 2: Application Frontend
-1. **Choisir une des technologies suivantes : Angular, React ou React Native.**
+1. **Choisir une des technologies suivantes : Angular, React, React Native ou Ionic.**
 2. **Créer une application front-end qui consomme le backend mock.**
 
 #### Fonctionnalités de l'application front-end
@@ -29,8 +29,6 @@ Créer une application front-end en Angular, React ou React Native qui interagit
    - Chaque composant doit avoir sa propre logique et style (si applicable).
 4. **Gestion de l'état (State Management) :**
    - Utiliser une solution de gestion de l'état appropriée (par exemple, NgRx pour Angular, Redux ou Context API pour React).
-5. **Tests :**
-   - Inclure des tests unitaires pour les composants principaux et les services.
 
 #### Partie 3: Conteneurisation avec Docker
 1. **Créer un Dockerfile pour le backend Node.js.**
@@ -131,6 +129,40 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
+React Native:
+```dockerfile
+# Dockerfile
+FROM node:14
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 8081
+
+CMD ["npx", "react-native", "start"]
+```
+
+Ionic:
+```dockerfile
+# Dockerfile
+FROM node:14
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 8100
+
+CMD ["npx", "ionic", "serve", "--host", "0.0.0.0", "--port", "8100"]
+```
+
 #### docker-compose.yml
 ```yaml
 version: '3'
@@ -156,6 +188,5 @@ services:
 2. **Modularisation :** Les composants sont bien structurés et modulaires.
 3. **Code propre :** Le code est bien organisé, lisible et commenté si nécessaire.
 4. **Conteneurisation :** L'application est correctement conteneurisée et peut être lancée avec Docker Compose.
-5. **Tests :** Présence et qualité des tests unitaires.
 
 Bonne chance !
