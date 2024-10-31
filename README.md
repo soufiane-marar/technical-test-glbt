@@ -1,44 +1,40 @@
-### Test Technique pour Développeurs Frontend (Angular/React/React Native/Ionic)
+# Test Technique d'En Voiture Simone sur le développement frontend
+![](https://www.envoituresimone.com/packs/media/images/logo-799cc6b9049e7e56d573120ec02c5eb5.svg)
 
-#### Objectif
-Créer une application front-end en Angular, React, React Native ou Ionic qui interagit avec un backend Node.js mock. L'objectif est d'évaluer la compétence du candidat en termes de modularisation des composants, de structuration de l'application, et de déploiement avec Docker.
+## Objectif
+L'objectif est de créer une application front-end en Angular qui interagit avec un backend Node.js mock. 
+Le but de ce test sera de servir de base de discussion à l'entretien technique, en proposant un code de qualité.
 
-#### Durée estimée
-2 heures
+### Durée estimée
+2 à 3 heures
 
-### Instructions
+## Instructions
 
-#### Partie 1: Backend Mock en Node.js
-1. **Créer un serveur mock en Node.js avec Express.**
-   - Le serveur doit avoir deux endpoints :
-     - `GET /api/items`: Retourne une liste d'items.
-     - `POST /api/items`: Ajoute un item à la liste.
-   - Les données peuvent être stockées en mémoire (pas besoin de base de données).
-
-#### Partie 2: Application Frontend
-1. **Choisir une des technologies suivantes : Angular, React, React Native ou Ionic.**
-2. **Créer une application front-end qui consomme le backend mock.**
+L'objectif est de faire une application minimale de gestions des examens à destination de nos enseignants.
 
 #### Fonctionnalités de l'application front-end
-1. **Affichage de la liste des items :**
-   - Une page ou une vue qui affiche la liste des items récupérés du serveur via l'endpoint `GET /api/items`.
-2. **Ajout d'un nouvel item :**
-   - Un formulaire ou une interface qui permet d'ajouter un nouvel item via l'endpoint `POST /api/items`.
-3. **Modularisation :**
-   - Utiliser une architecture modulaire avec des composants bien définis.
-   - Chaque composant doit avoir sa propre logique et style (si applicable).
-4. **Gestion de l'état (State Management) :**
-   - Utiliser une solution de gestion de l'état appropriée (par exemple, NgRx pour Angular, Redux ou Context API pour React).
+1. **Affichage de la liste des examens  :**
+   - Une page ou une vue qui affiche la liste des items récupérés du serveur via l'endpoint `GET /api/exams`.
+2. **Ajout d'un nouvel examen :**
+   - Un formulaire ou une interface qui permet d'ajouter un nouvel item via l'endpoint `POST /api/exams`, lors du clic sur le bouton "Organiser un examen".
 
-#### Partie 3: Conteneurisation avec Docker
+Le rendu devra s'inspirer du mockup suivant :
+
+![](exam_app.png)
+
+### Conteneurisation avec Docker
+L'application doit pouvoir être lancée avec une simple commande :
+
+``` docker compose up ```
+
+Il est suggéré de :
 1. **Créer un Dockerfile pour le backend Node.js.**
 2. **Créer un Dockerfile pour l'application front-end.**
-3. **Créer un fichier `docker-compose.yml` pour orchestrer les services :**
+3. **Utiliser le fichier `docker-compose.yml` fourni pour orchestrer les services :**
    - Un service pour le backend.
    - Un service pour le front-end.
-4. **Démarrer les services avec Docker Compose et vérifier que l'application fonctionne correctement.**
 
-### Détails Techniques
+### Aides techniques
 
 #### Backend (Node.js + Express)
 ```javascript
@@ -53,11 +49,11 @@ app.use(cors());
 
 let items = [];
 
-app.get('/api/items', (req, res) => {
+app.get('/api/exams', (req, res) => {
   res.json(items);
 });
 
-app.post('/api/items', (req, res) => {
+app.post('/api/exams', (req, res) => {
   const newItem = req.body;
   items.push(newItem);
   res.status(201).json(newItem);
@@ -67,100 +63,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-```
-
-#### Dockerfile pour le backend
-```dockerfile
-# Dockerfile
-FROM node:14
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["node", "server.js"]
-```
-
-#### Dockerfile pour le frontend
-Angular:
-```dockerfile
-# Dockerfile
-FROM node:14 as build
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-RUN npm run build
-
-FROM nginx:alpine
-COPY --from=build /app/dist/<nom-du-projet> /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-React:
-```dockerfile
-# Dockerfile
-FROM node:14 as build
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-RUN npm run build
-
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-React Native:
-```dockerfile
-# Dockerfile
-FROM node:14
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-EXPOSE 8081
-
-CMD ["npx", "react-native", "start"]
-```
-
-Ionic:
-```dockerfile
-# Dockerfile
-FROM node:14
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-EXPOSE 8100
-
-CMD ["npx", "ionic", "serve", "--host", "0.0.0.0", "--port", "8100"]
 ```
 
 #### docker-compose.yml
@@ -178,14 +80,14 @@ services:
       - "80:80"
 ```
 
-### Livrables attendus
-1. **Code source de l'application front-end et back-end.**
-2. **Fichiers Docker et docker-compose fonctionnels.**
-3. **Instructions pour lancer l'application avec Docker.**
+## Livrable attendus
+L'ensemble des fichiers permettant le lancement de l'application via la commande suivante :
+
+``` docker compose up ```
 
 ### Critères d'évaluation
 1. **Fonctionnalité :** L'application fonctionne comme attendu et interagit correctement avec le backend.
-2. **Modularisation :** Les composants sont bien structurés et modulaires.
+2. **Modularisation :** Les composants sont bien structurés et modulaires. L'architecture retenue permettra d'ajouter facilement de nouvelles fonctionnalités.
 3. **Code propre :** Le code est bien organisé, lisible et commenté si nécessaire.
 4. **Conteneurisation :** L'application est correctement conteneurisée et peut être lancée avec Docker Compose.
 
