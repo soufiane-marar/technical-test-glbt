@@ -49,7 +49,9 @@ L'ensemble des fichiers permettant le lancement de l'application via la commande
 ### Critères d'évaluation
 1. **Fonctionnalité :** L'application fonctionne comme attendu et interagit correctement avec le backend.
 2. **Modularisation :** Les composants sont bien structurés et modulaires. L'architecture retenue permettra d'ajouter facilement de nouvelles fonctionnalités.
-3. **Code propre :** Le code est bien organisé, lisible et commenté si nécessaire.
+3. **Code propre :** Le code est bien organisé, lisible et facilement compréhensible. En bref, il doit être "production-ready"!
 4. **Conteneurisation :** L'application est correctement conteneurisée et peut être lancée avec Docker Compose.
+
+Si vous avez identifié des choses imparfaites dans votre code (par manque de temps par exemple), ajoutez les au README pour qu'on puisse en discuter!
 
 Bonne chance !
