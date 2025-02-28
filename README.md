@@ -47,7 +47,7 @@ L'ensemble des fichiers permettant le lancement de l'application via la commande
 ``` docker compose up ```
 
 ### Critères d'évaluation
-1. **Fonctionnalité :** L'application fonctionne comme attendu et interagit correctement avec le backend.
+1. **Qualité fonctionnelle :** L'application fonctionne comme attendu, interagit correctement avec le backend et est propre pour l'utilisateur.
 2. **Modularisation :** Les composants sont bien structurés et modulaires. L'architecture retenue permettra d'ajouter facilement de nouvelles fonctionnalités.
 3. **Code propre :** Le code est bien organisé, lisible et facilement compréhensible. En bref, il doit être "production-ready"!
 4. **Conteneurisation :** L'application est correctement conteneurisée et peut être lancée avec Docker Compose.
