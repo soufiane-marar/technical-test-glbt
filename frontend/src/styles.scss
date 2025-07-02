@@ -1,0 +1,18 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "font-awesome/css/font-awesome.min.css";
+
+html, body {
+  margin: 0 !important;
+  min-height: 60vh !important;
+  width: 100vw !important;
+}
+
+.text-dark-gray {
+  color: #323232 !important;
+}
+
+
+.exam-container {
+  background: #e7e7e7;
+  height: 100vh !important;
+}

@@ -1,0 +1,74 @@
+<div class="exam-container pt-5">
+  <div class="w-75 mx-auto d-flex flex-column gap-2">
+    <div class="w-100 d-flex justify-content-between align-items-center">
+      <div class="d-flex flex-column">
+        <h3>Mes examens</h3>
+        <span class="text-secondary fw-bold">{{ examsList().length }} examens à venir</span>
+      </div>
+      <button class="btn btn-danger rounded-4" routerLink="/exam-form">Organiser un examen</button>
+    </div>
+    <div class="w-100 d-flex flex-column gap-1 pt-3 text-dark-gray">
+      @for (item of examsList(); track $index) {
+        <div class="w-100 row  border border-secondary-subtle rounded-4 py-2 px-3">
+          <div class="col-4 d-flex align-items-center">
+            <i class="fa fa-user-o"></i>
+            <span class="fw-medium ms-2"> {{ item.student.first_name }} {{ item.student.last_name }}</span>
+          </div>
+          <div class="col-3 d-flex align-items-center">
+            <i class="fa fa-map-marker"></i>
+            @if (item.meeting_point) {
+              <span class="fw-medium ms-2"> {{ item.meeting_point }}</span>
+            } @else {
+              <span class="fw-light fst-italic ms-2">
+                En attente
+              </span>
+            }
+          </div>
+          <div class="col-2 d-flex align-items-center">
+            <i class="fa fa-calendar-o"></i>
+            @if (item.date) {
+              <span class="fw-medium ms-2">
+                {{ item.date | date: 'd MMMM' }}
+              </span>
+            } @else {
+              <span class="fw-light fst-italic ms-2">
+                En attente
+              </span>
+            }
+          </div>
+          <div class="col-3">
+            @switch (item.status) {
+              @case (examStatus.Confirme) {
+                <div class="alert alert-success d-inline-block align-items-center rounded-5 py-2 px-3 my-auto">
+                  <i class="fa fa-check"></i>
+                  <span class="fw-medium"> {{ item.status }}</span>
+                </div>
+              }
+              @case (examStatus.Annule) {
+                <div class="alert alert-danger d-inline-block align-items-center rounded-5 py-2 px-3 my-auto">
+                  <i class="fa fa-times"></i>
+                  <span class="fw-medium"> {{ item.status }}</span>
+                </div>
+              }
+              @case (examStatus.AOrganiser) {
+                <div class="alert alert-warning d-inline-block align-items-center rounded-5 py-2 px-3 my-auto">
+                  <i class="fa fa-location-arrow"></i>
+                  <span class="fw-medium"> {{ item.status }}</span>
+                </div>
+              }
+              @case (examStatus.RechercheDePlace) {
+                <div class="alert alert-secondary d-inline-block align-items-center rounded-5 py-2 px-3 my-auto">
+                  <i class="fa fa-hourglass-start"></i>
+                  <span class="fw-medium"> {{ item.status }}</span>
+                </div>
+              }
+              @default {
+                {{ item.status }}
+              }
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

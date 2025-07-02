@@ -39,7 +39,7 @@ Il est suggéré de :
 3 fichiers sont fournis, pour permettre de se concentrer sur la partie front-end :
 - Un swagger qui décrit le format de l'API et les modèles de données. [exam-api.yml](exam-api.yml)
 - Le [docker-compose.yml](docker-compose.yml), qui nécessitera les Dockerfile
-- Le [server.js](server.js), qui contient un serveur mock.
+- Le [server.js](backend/server.js), qui contient un serveur mock.
 
 ## Livrable attendus
 L'ensemble des fichiers permettant le lancement de l'application via la commande suivante :
